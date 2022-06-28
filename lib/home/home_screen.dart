@@ -1,5 +1,6 @@
 import 'package:ex6/cart/cart_state.dart';
 import 'package:ex6/home/widget/product_list_widget.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,6 +12,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    FirebaseAnalytics.instance.setCurrentScreen(screenName: 'HomeScreen');
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     print('hoan.dv: build home screen');

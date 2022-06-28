@@ -1,11 +1,19 @@
 import 'package:ex6/cart/cart_state.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'cart/cart_screen.dart';
+import 'firebase_options.dart';
 import 'home/home_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(
     MultiProvider(
       providers: [
@@ -13,13 +21,15 @@ void main() {
           create: (context) => CartState(),
         ),
       ],
-      child: const MyApp(),
+      child: MyApp(),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
+
+  final FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.instance;
 
   // This widget is the root of your application.
   @override
@@ -36,6 +46,9 @@ class MyApp extends StatelessWidget {
         '/cart_page': (context) => const MyCart(),
         //'/detail_product_page': (context) => const DetailProductScreen(),
       },
+      navigatorObservers: [
+        FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
+      ],
     );
   }
 }

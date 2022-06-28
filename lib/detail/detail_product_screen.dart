@@ -1,6 +1,7 @@
 import 'package:ex6/cart/cart_state.dart';
 import 'package:ex6/detail/widget/ingredient_widget.dart';
 import 'package:ex6/detail/widget/step_widget.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,6 +18,13 @@ class DetailProductScreen extends StatefulWidget {
 }
 
 class _DetailProductScreenState extends State<DetailProductScreen> {
+  @override
+  void initState() {
+    FirebaseAnalytics.instance
+        .setCurrentScreen(screenName: 'DetailProductScreen');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     print('hoan.dv: build Product detail');
@@ -191,7 +199,17 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
               children: [
                 ElevatedButton(
                   child: const Icon(Icons.shopping_cart),
-                  onPressed: () {
+                  onPressed: () async {
+                    // custom event
+                    await FirebaseAnalytics.instance.logEvent(
+                      name: "add_product_to_cart",
+                      parameters: {
+                        "count": "image",
+                        "name": product.name,
+                        "id": product.id
+                      },
+                    );
+
                     Provider.of<CartState>(context, listen: false)
                         .addToCart(product);
                   },
