@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:ex6/cart/cart_state.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,14 +18,35 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => CartState(),
+  if (kDebugMode) {
+    // Force disable Crashlytics collection while doing every day development.
+    // Temporarily toggle this to true if you want to test crash reporting in your app.
+    await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+  } else {
+    // Handle Crashlytics enabled status when not in Debug,
+    // e.g. allow your users to opt-in to crash reporting.
+    await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+  }
+
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+
+  runZonedGuarded(
+    () {
+      runApp(
+        MultiProvider(
+          providers: [
+            ChangeNotifierProvider(
+              create: (context) => CartState(),
+            ),
+          ],
+          child: MyApp(),
         ),
-      ],
-      child: MyApp(),
+      );
+    },
+    (error, stack) => FirebaseCrashlytics.instance.recordError(
+      error,
+      stack,
+      fatal: true,
     ),
   );
 }

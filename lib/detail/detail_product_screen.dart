@@ -2,6 +2,7 @@ import 'package:ex6/cart/cart_state.dart';
 import 'package:ex6/detail/widget/ingredient_widget.dart';
 import 'package:ex6/detail/widget/step_widget.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -212,6 +213,8 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
 
                     Provider.of<CartState>(context, listen: false)
                         .addToCart(product);
+
+                    FirebaseCrashlytics.instance.crash();
                   },
                   style: ElevatedButton.styleFrom(
                     shape: const CircleBorder(),
