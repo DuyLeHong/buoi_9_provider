@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:ex6/add_user/add_user_page.dart';
 import 'package:ex6/auth/login/login_page.dart';
 import 'package:ex6/cart/cart_state.dart';
 import 'package:ex6/splash/splash_page.dart';
+import 'package:ex6/user_list/user_list_page.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -68,13 +70,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/splash',
+      initialRoute: '/user_list',
       routes: {
         '/splash': (_) => const SplashPage(),
         '/': (context) => const HomePage(),
         '/register': (_) => RegisterPage(),
-        '/login': (_) => LoginPage(),
+        '/login': (_) => const LoginPage(),
         '/cart_page': (context) => const MyCart(),
+        '/add_user': (_) => AddUserPage(),
+        '/user_list': (_) => UserListPage(),
         //'/detail_product_page': (context) => const DetailProductScreen(),
       },
       navigatorObservers: [
