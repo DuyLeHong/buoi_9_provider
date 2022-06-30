@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../data/product.dart';
+import '../../../data/product.dart';
 
 class ProductItem extends StatefulWidget {
   final Product product;

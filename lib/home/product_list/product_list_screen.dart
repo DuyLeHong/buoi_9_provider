@@ -1,17 +1,17 @@
 import 'package:ex6/cart/cart_state.dart';
-import 'package:ex6/home/widget/product_list_widget.dart';
+import 'package:ex6/home/product_list/widget/product_list_widget.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class ProductListPage extends StatefulWidget {
+  const ProductListPage({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<ProductListPage> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<ProductListPage> {
   @override
   void initState() {
     FirebaseAnalytics.instance.setCurrentScreen(screenName: 'HomeScreen');

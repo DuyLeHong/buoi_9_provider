@@ -1,9 +1,9 @@
-import 'package:ex6/home/home_state.dart';
-import 'package:ex6/home/widget/product_item_widget.dart';
+import 'package:ex6/home/product_list/product_list_state.dart';
 import 'package:flutter/material.dart';
 
-import '../../data/product.dart';
-import '../../detail/detail_product_screen.dart';
+import '../../../data/product.dart';
+import '../../../detail/detail_product_screen.dart';
+import '../widget/product_item_widget.dart';
 
 class ProductListWidget extends StatelessWidget {
   const ProductListWidget({Key? key, required this.onCartUpdated})

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:ex6/cart/cart_state.dart';
+import 'package:ex6/splash/splash_page.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -8,9 +9,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'auth/register/register_page.dart';
 import 'cart/cart_screen.dart';
 import 'firebase_options.dart';
-import 'home/home_screen.dart';
+import 'home/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -65,9 +67,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/',
+      initialRoute: '/splash',
       routes: {
-        '/': (context) => const HomeScreen(),
+        '/splash': (_) => const SplashPage(),
+        '/': (context) => const HomePage(),
+        '/register': (_) => RegisterPage(),
         '/cart_page': (context) => const MyCart(),
         //'/detail_product_page': (context) => const DetailProductScreen(),
       },
