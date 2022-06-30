@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:ex6/auth/login/login_page.dart';
 import 'package:ex6/cart/cart_state.dart';
 import 'package:ex6/splash/splash_page.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -72,6 +73,7 @@ class MyApp extends StatelessWidget {
         '/splash': (_) => const SplashPage(),
         '/': (context) => const HomePage(),
         '/register': (_) => RegisterPage(),
+        '/login': (_) => LoginPage(),
         '/cart_page': (context) => const MyCart(),
         //'/detail_product_page': (context) => const DetailProductScreen(),
       },

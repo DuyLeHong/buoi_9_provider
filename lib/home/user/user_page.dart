@@ -34,6 +34,14 @@ class _UserPageState extends State<UserPage> {
           children: [
             Text('User Id: $id'),
             Text('Email: $email'),
+            SizedBox(height: 50),
+            TextButton(
+                onPressed: () {
+                  FirebaseAuth.instance.signOut().then((value) {
+                    Navigator.of(context).pushReplacementNamed('/login');
+                  });
+                },
+                child: Text('Log out'))
           ],
         ),
       ),
